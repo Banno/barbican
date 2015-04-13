@@ -45,7 +45,7 @@ debug_barbican()
     echo "Starting barbican in debug mode ..." --pydev-debug-host $debug_host --pydev-debug-port $debug_port
     PYDEV_DEBUG_PARAM="--env PYDEV_DEBUG_HOST=$debug_host --env PYDEV_DEBUG_PORT=$debug_port"
 
-    uwsgi --master --emperor $CONFIG_DIR/vassals
+    uwsgi --master --emperor $CONFIG_DIR/vassals $PYDEV_DEBUG_PARAM
 }
 
 start_barbican()
