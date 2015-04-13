@@ -5,7 +5,6 @@ DB_DIR=/var/lib/barbican
 
 # VIRTUAL_ENV is set by virtualenv on activate. If VIRTUAL_ENV is not,
 # available, it attempts to fallback on pyenv for the python environment path.
-VENV_DIR=${VIRTUAL_ENV:-`pyenv prefix`}
 
 LOCAL_CONFIG_DIR=./etc/barbican
 if [ ! -d $LOCAL_CONFIG_DIR ];
@@ -46,7 +45,7 @@ debug_barbican()
     echo "Starting barbican in debug mode ..." --pydev-debug-host $debug_host --pydev-debug-port $debug_port
     PYDEV_DEBUG_PARAM="--env PYDEV_DEBUG_HOST=$debug_host --env PYDEV_DEBUG_PORT=$debug_port"
 
-    uwsgi --master --emperor $CONFIG_DIR/vassals -H $VENV_DIR $PYDEV_DEBUG_PARAM
+    uwsgi --master --emperor $CONFIG_DIR/vassals
 }
 
 start_barbican()
@@ -54,7 +53,7 @@ start_barbican()
     # Start barbican server up.
     #   Note: Add ' --stats :9314' to run a stats server on port 9314
     echo "Starting barbican..."
-    uwsgi --master --emperor $CONFIG_DIR/vassals -H $VENV_DIR
+    uwsgi --master --emperor $CONFIG_DIR/vassals
 }
 
 stop_barbican()
@@ -101,8 +100,6 @@ install_barbican()
 
     # Run unit tests
     python setup.py testr
-
-    start_barbican
 }
 
 

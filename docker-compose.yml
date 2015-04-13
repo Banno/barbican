@@ -1,0 +1,5 @@
+api:
+  build: .
+  command: bin/barbican.sh start
+  ports:
+      - 9311:9311
